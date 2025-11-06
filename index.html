@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Todo-app</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- jQuery + script al final del body (más fiable) -->
+</head>
+<body>
+  <h1>Todo-app PHP no API REST (Archivos)</h1>
+
+  <form id="form-insertar" action="insertar-tarea.php" method="POST">
+    <div class="fila-form">
+      <label for="titulo">Titulo</label>
+      <input type="text" name="title" id="title">
+    </div>
+    <div class="fila-form">
+      <label for="descripcion">Descripcion</label>
+      <input type="text" name="description" id="description">
+    </div>
+    <div class="fila-form">
+      <input type="submit" name="insertar" id="insertar" value="Insertar">
+    </div>
+  </form>
+
+  <button id="btn-obtener-tareas">Obtener tareas</button>
+  <div id="tareas">
+    <p id="mensaje-info">Pulsa el botón para obtener las tareas</p>
+
+    <table id="tabla-tareas">
+      <thead>
+        <tr>
+          <th>ideee</th>
+          <th>titulo</th>
+          <th>descripcion</th>
+          <th>fecha creacion</th>
+        </tr>
+      </thead>
+      <tbody id="contenido-tabla-tareas">
+        <!-- Se creara dinámicamente con js -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="js/jquery-3.7.1.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
