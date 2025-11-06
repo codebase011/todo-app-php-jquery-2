@@ -17,11 +17,13 @@ $(function () {
 
     $('#form-insertar').on('submit', function (e) {
         e.preventDefault();
-        $.ajax({
+
+        // Enviar como www-urlencoded (recibir en php como $_POST["title"], etc.)
+/*         $.ajax({
             url: 'api/insertar-tarea.php',
             method: 'POST',
             dataType: 'json',
-            data: {title: $('#title').val(), description: $('#description').val() },
+            data: { title: $('#title').val(), description: $('#description').val() },
             success: function (data) {
                 console.log('Tarea insertada', data);
                 $mensajeInfo.text('Tareas insertada');
@@ -29,6 +31,21 @@ $(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error('Error al insertar la tarea:', textStatus, errorThrown);
+            }
+        }); */
+
+        // Enviar como json (recibir en php con $input = json_decode(file_get_contents("php://input"), true);)
+        $.ajax({
+            url: 'api/insertar-tarea.php',
+            method: 'POST',
+            contentType: 'application/json',   // <--- le dices a PHP que envías JSON
+            dataType: 'json',                  // <--- esperas JSON de respuesta
+            data: JSON.stringify({
+                title: $('#title').val(),
+                description: $('#description').val()
+            }),
+            success: function (data) {
+                console.log('Tarea insertada:', data);
             }
         });
     });

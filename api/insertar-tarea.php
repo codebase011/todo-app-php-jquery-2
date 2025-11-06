@@ -10,9 +10,15 @@ header("Content-Type: application/json; charset=UTF-8");
 try {
     $pdo = getPDO();
 
-    // obtener datos de forma segura
-    $title = isset($_POST['title']) ? trim($_POST['title']) : '';
+    // obtener datos de forma segura (www-urlencoded)
+/*     $title = isset($_POST['title']) ? trim($_POST['title']) : '';
     $description = isset($_POST['description']) ? trim($_POST['description']) : '';
+ */
+    // En lugar de $_POST (contentType: 'application/json' desde ajax)
+    $input = json_decode(file_get_contents("php://input"), true);
+    $title = $input['title'] ?? '';
+    $description = $input['description'] ?? '';
+
 
     // validación simple
     if ($title === '') {
@@ -41,7 +47,6 @@ try {
         'description' => $description
     ]);
     exit;
-
 } catch (PDOException $e) {
     error_log("Error al insertar todo: " . $e->getMessage());
     http_response_code(500);
